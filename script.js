@@ -3,9 +3,9 @@ let nomeUsuario = window.document.getElementById('input-nome-usuario')
 let nomeProduto = window.document.getElementById('input-nome-produto')
 
 let valorProduto = window.document.getElementById('input-valor-produto')
-let valorProdutoValue = valorProduto.value
 
 
+let usuarios = []
 
 class Itens {
     constructor(nome, valor) {
@@ -47,18 +47,30 @@ class Itens {
   
 
   function criarUsuario() {
-    let nomeUsuarioValue = nomeUsuario.value
+    let nomeUsuarioValue = document.getElementById('input-nome-usuario').value;
 
-    let usuario = new Usuario(nomeUsuarioValue)
+    let novoUsuario = new Usuario(nomeUsuarioValue)
+    usuarios.push(novoUsuario)
+  }
 
-    console.log(usuario)
+
+
+  function adicionarItemAoCarrinho(){
+    if(usuarios.length > 0) {
+    let ultimoUsuario = usuarios[usuarios.length - 1]
+    let valorProdutoValue = window.document.getElementById('input-valor-produto').value
+    let nomeProdutoValue = window.document.getElementById('input-nome-produto').value
+    novoItem = {nome: nomeProdutoValue, valor: valorProdutoValue}
+      
+    ultimoUsuario.adicionarItem(novoItem.nome, novoItem.valor)
+
+    console.log(ultimoUsuario)
     
-  }
 
-  function adicionarItem(){
-    let nomeProdutoValue = nomeProduto.value
-
-    usuario.nomeItem = nomeProdutoValue
-
+      
+    } else {
+      window.alert('Crie um usuário primeiro.')
+    }
 
   }
+
